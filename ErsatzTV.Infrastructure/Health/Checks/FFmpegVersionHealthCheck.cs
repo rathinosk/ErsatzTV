@@ -19,7 +19,7 @@ public class FFmpegVersionHealthCheck(
 
     public async Task<HealthCheckResult> Check(CancellationToken cancellationToken)
     {
-        var link = new HealthCheckLink("https://github.com/ErsatzTV/ErsatzTV-ffmpeg/releases/tag/7.1.1");
+        var link = new HealthCheckLink("https://github.com/rathinosk/ErsatzTV-ffmpeg/releases/tag/7.1.1");
 
         Option<ConfigElement> maybeFFmpegPath =
             await configElementRepository.GetConfigElement(ConfigElementKey.FFmpegPath, cancellationToken);

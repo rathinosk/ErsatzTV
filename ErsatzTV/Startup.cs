@@ -344,7 +344,7 @@ public class Startup
 
         Log.Logger.Warning(
             "Report bugs to {GitHub} or contact us at {Contact}",
-            "https://github.com/ErsatzTV/ErsatzTV",
+            "https://github.com/rathinosk/ErsatzTV",
             "https://ersatztv.org/contact");
 
         CopyMacOsConfigFolderIfNeeded();
