@@ -9,9 +9,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
-## [26.3.1] - 2026-02-24
-### Changed
+## [26.4.0] - 2026-04-05
+
+### New Fork
+This is the first new release in my own fork of ErsatzTV. I am continuing the version numbering for my own sanity.
 - Updated workflows for my new repository.
+- Disabled Apple and Azure builds as I do not use them.
+- Added some debug and sanity check steps to the forflow for my own debugging.
+- Added my instructions for GitHub Copilot to help keep it from mangling things.
+
+These changes were apparently already in the code:
+
+### Changed
 - Remove BugSnag error reporting integration
 - Remove developer's personal Trakt API key
   - Users who want to continue to use Trakt must create an API app and set the `Client ID` as the environment variable `TRAKT__CLIENTID`
