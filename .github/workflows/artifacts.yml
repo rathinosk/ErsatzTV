@@ -44,13 +44,6 @@ permissions:
 jobs:
   build_and_upload_mac:
     # Skip the entire macOS job unless the Apple secrets are available
-    if: >-
-      ${{
-        secrets.apple_developer_certificate_p12_base64 != '' &&
-        secrets.apple_developer_certificate_password != '' &&
-        secrets.ac_username != '' &&
-        secrets.ac_password != ''
-      }}
     name: Mac Build & Upload
     runs-on: ${{ matrix.os }}
     strategy:
@@ -281,12 +274,6 @@ jobs:
 
       # Only attempt Azure login + signing when secrets exist
       - name: Azure login
-        if: >-
-          ${{
-            secrets.azure_client_id != '' &&
-            secrets.azure_tenant_id != '' &&
-            secrets.azure_subscription_id != ''
-          }}
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.azure_client_id }}
@@ -295,12 +282,6 @@ jobs:
           enable-AzPSSession: true
 
       - name: Sign dotnet artifacts
-        if: >-
-          ${{
-            secrets.azure_client_id != '' &&
-            secrets.azure_tenant_id != '' &&
-            secrets.azure_subscription_id != ''
-          }}
         uses: azure/trusted-signing-action@v0
         with:
           endpoint: https://eus.codesigning.azure.net/

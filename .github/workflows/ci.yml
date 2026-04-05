@@ -41,8 +41,6 @@ jobs:
       release_tag: develop
       release_version: ${{ needs.calculate_version.outputs.artifacts_version }}
       info_version: ${{ needs.calculate_version.outputs.info_version }}
-    # It's fine to pass these even if they don't exist in the fork.
-    # The called workflow will skip macOS and/or Azure signing when missing.
     secrets:
       apple_developer_certificate_p12_base64: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_P12_BASE64 }}
       apple_developer_certificate_password: ${{ secrets.APPLE_DEVELOPER_CERTIFICATE_PASSWORD }}
