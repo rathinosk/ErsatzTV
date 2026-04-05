@@ -15,27 +15,42 @@ on:
         required: true
         type: string
     secrets:
+      # Optional: required only for macOS signing + notarization
       apple_developer_certificate_p12_base64:
-        required: true
+        required: false
       apple_developer_certificate_password:
-        required: true
+        required: false
       ac_username:
-        required: true
+        required: false
       ac_password:
-        required: true
+        required: false
+
+      # Required for uploading releases / deleting old assets
       gh_token:
         required: true
+
+      # Optional: required only for Azure Trusted Signing (Windows)
       azure_client_id:
-        required: true
+        required: false
       azure_tenant_id:
-        required: true
+        required: false
       azure_subscription_id:
-        required: true
+        required: false
+
 permissions:
   id-token: write
   contents: write
+
 jobs:
   build_and_upload_mac:
+    # Skip the entire macOS job unless the Apple secrets are available
+    if: >-
+      ${{
+        secrets.apple_developer_certificate_p12_base64 != '' &&
+        secrets.apple_developer_certificate_password != '' &&
+        secrets.ac_username != '' &&
+        secrets.ac_password != ''
+      }}
     name: Mac Build & Upload
     runs-on: ${{ matrix.os }}
     strategy:
@@ -81,8 +96,8 @@ jobs:
         shell: bash
         run: |
           sed -i '' '/Scanner/d' rathinosk/ersatztv/ersatztv.csproj
-          dotnet publish ErsatzTV.Scanner/ErsatzTV.Scanner.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=false -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
-          dotnet publish rathinosk/ersatztv/ersatztv.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=false -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
+          dotnet publish ErsatzTV.Scanner/ErsatzTV.Scanner.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
+          dotnet publish rathinosk/ersatztv/ersatztv.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
 
       - name: Bundle
         shell: bash
@@ -264,7 +279,14 @@ jobs:
           name: dotnet-windows-build
           path: dotnet-build
 
+      # Only attempt Azure login + signing when secrets exist
       - name: Azure login
+        if: >-
+          ${{
+            secrets.azure_client_id != '' &&
+            secrets.azure_tenant_id != '' &&
+            secrets.azure_subscription_id != ''
+          }}
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.azure_client_id }}
@@ -273,6 +295,12 @@ jobs:
           enable-AzPSSession: true
 
       - name: Sign dotnet artifacts
+        if: >-
+          ${{
+            secrets.azure_client_id != '' &&
+            secrets.azure_tenant_id != '' &&
+            secrets.azure_subscription_id != ''
+          }}
         uses: azure/trusted-signing-action@v0
         with:
           endpoint: https://eus.codesigning.azure.net/
