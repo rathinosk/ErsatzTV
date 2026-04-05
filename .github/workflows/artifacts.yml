@@ -254,7 +254,7 @@ jobs:
           dotnet publish ErsatzTV/ErsatzTV.csproj --framework net10.0 --runtime "win-x64" -c Release -o "main" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-win-x64" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
 
       - name: Upload .NET Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dotnet-windows-build
           path: |
