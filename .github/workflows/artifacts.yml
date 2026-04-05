@@ -141,6 +141,7 @@ jobs:
   #         token: ${{ secrets.gh_token }}
   #         tag: ${{ inputs.release_tag }}
   #         fail-if-no-assets: false
+  #         fail-if-no-release: false
   #         assets: "*${{ matrix.target }}.dmg"
   #
   #     - name: Publish
@@ -213,6 +214,7 @@ jobs:
           token: ${{ secrets.gh_token }}
           tag: ${{ inputs.release_tag }}
           fail-if-no-assets: false
+          fail-if-no-release: false
           assets: "*${{ matrix.target }}.tar.gz"
 
       - name: Publish
@@ -332,6 +334,7 @@ jobs:
   #         token: ${{ secrets.gh_token }}
   #         tag: ${{ inputs.release_tag }}
   #         fail-if-no-assets: false
+  #         fail-if-no-release: false
   #         assets: "*win-x64.zip"
 
   #     - name: Publish
