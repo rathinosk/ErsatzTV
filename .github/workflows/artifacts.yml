@@ -87,9 +87,9 @@ jobs:
   #     - name: Build
   #       shell: bash
   #       run: |
-  #         sed -i '' '/Scanner/d' rathinosk/ersatztv/ersatztv.csproj
+  #         sed -i '' '/Scanner/d' rathinosk/ErsatzTV/ErsatzTV.csproj
   #         dotnet publish ErsatzTV.Scanner/ErsatzTV.Scanner.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
-  #         dotnet publish rathinosk/ersatztv/ersatztv.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
+  #         dotnet publish rathinosk/ErsatzTV/ErsatzTV.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o publish -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
   #
   #     - name: Bundle
   #       shell: bash
@@ -195,9 +195,9 @@ jobs:
           echo "RELEASE_NAME=${release_name}" >> $GITHUB_ENV
 
           # Build everything
-          sed -i '/Scanner/d' rathinosk/ersatztv/ersatztv.csproj
+          sed -i '/Scanner/d' rathinosk/ErsatzTV/ErsatzTV.csproj
           dotnet publish ErsatzTV.Scanner/ErsatzTV.Scanner.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o "scanner" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
-          dotnet publish rathinosk/ersatztv/ersatztv.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o "main" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
+          dotnet publish rathinosk/ErsatzTV/ErsatzTV.csproj --framework net10.0 --runtime "${{ matrix.target }}" -c Release -o "main" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-${{ matrix.target }}" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
           mkdir "$release_name"
           mv scanner/* "$release_name/"
           mv main/* "$release_name/"
@@ -247,9 +247,9 @@ jobs:
       - name: Build dotnet projects
         shell: bash
         run: |
-          sed -i '/Scanner/d' rathinosk/ersatztv/ersatztv.csproj
+          sed -i '/Scanner/d' rathinosk/ErsatzTV/ErsatzTV.csproj
           dotnet publish ErsatzTV.Scanner/ErsatzTV.Scanner.csproj --framework net10.0 --runtime "win-x64" -c Release -o "scanner" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-win-x64" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
-          dotnet publish rathinosk/ersatztv/ersatztv.csproj --framework net10.0 --runtime "win-x64" -c Release -o "main" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-win-x64" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
+          dotnet publish rathinosk/ErsatzTV/ErsatzTV.csproj --framework net10.0 --runtime "win-x64" -c Release -o "main" -p:RestoreEnablePackagePruning=true -p:InformationalVersion="${{ inputs.release_version }}-win-x64" -p:EnableCompressionInSingleFile=true -p:DebugType=Embedded -p:PublishSingleFile=true --self-contained true
 
       - name: Upload .NET Artifact
         uses: actions/upload-artifact@v4
