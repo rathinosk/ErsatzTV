@@ -1,10 +1,14 @@
+
+**NOTE:** This fork of ErsatzTV targets **Linux ONLY** with **MySQL** as the backend.
+
+I do not have a Windows Server running this software for testing.
+
+---
 # ErsatzTV
 
 ErsatzTV lets you transform your media library into a personalized, live TV experience - complete with EPG, channel scheduling, and seamless streaming to all your devices. Rediscover your content, your way.
 
-[![contact](https://img.shields.io/badge/contact_us-510b80?style=for-the-badge)](https://ersatztv.org/contact)
-[![features](https://img.shields.io/badge/vote_on_features-darkgreen?style=for-the-badge)](https://features.ersatztv.org/)
-[![community](https://img.shields.io/badge/join_the_community-blue?style=for-the-badge)](https://discuss.ersatztv.org)
+[![contact](https://img.shields.io/badge/contact_us-510b80?style=for-the-badge)](https://rathinosk.com)
 
 ![epg-example](https://ersatztv.org/images/home/epg-example.png)
 
