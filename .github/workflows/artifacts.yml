@@ -145,7 +145,7 @@ jobs:
   #         assets: "*${{ matrix.target }}.dmg"
   #
   #     - name: Publish
-  #       uses: softprops/action-gh-release@v1
+  #       uses: softprops/action-gh-release@v2
   #       with:
   #         prerelease: false
   #         tag_name: ${{ inputs.release_tag }}
@@ -218,7 +218,7 @@ jobs:
           assets: "*${{ matrix.target }}.tar.gz"
 
       - name: Publish
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: false
           tag_name: ${{ inputs.release_tag }}
@@ -268,7 +268,7 @@ jobs:
   #   needs: build_dotnet_windows
   #   steps:
   #     - name: Download dotnet artifacts
-  #       uses: actions/download-artifact@v4
+  #       uses: actions/download-artifact@v8
   #       with:
   #         name: dotnet-windows-build
   #         path: dotnet-build
@@ -338,7 +338,7 @@ jobs:
   #         assets: "*win-x64.zip"
 
   #     - name: Publish
-  #       uses: softprops/action-gh-release@v1
+  #       uses: softprops/action-gh-release@v2
   #       with:
   #         prerelease: false
   #         tag_name: ${{ inputs.release_tag }}

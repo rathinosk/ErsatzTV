@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
 ### Changed
+
+### Fixed
+
+## [26.3.1] - 2026-02-24
+### Changed
+- Updated workflows for my new repository.
 - Remove BugSnag error reporting integration
 - Remove developer's personal Trakt API key
   - Users who want to continue to use Trakt must create an API app and set the `Client ID` as the environment variable `TRAKT__CLIENTID`

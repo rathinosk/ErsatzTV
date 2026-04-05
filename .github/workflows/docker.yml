@@ -70,7 +70,7 @@ jobs:
 
       - name: Build and push by digest
         id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ./docker/${{ matrix.path }}Dockerfile
@@ -110,10 +110,31 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download all digest artifacts
-        uses: actions/download-artifact@v4
+      - name: Download digest-amd64 artifact
+        uses: actions/download-artifact@v8
         with:
-          path: digests/
+          name: digest-amd64
+          path: digests/digest-amd64
+
+      - name: Download digest-arm32v7 artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: digest-arm32v7
+          path: digests/digest-arm32v7
+
+      - name: Download digest-arm64 artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: digest-arm64
+          path: digests/digest-arm64
+
+      - name: Verify digest files exist
+        shell: bash
+        run: |
+          ls -R digests
+          test -f digests/digest-amd64/digest.txt
+          test -f digests/digest-arm32v7/digest.txt
+          test -f digests/digest-arm64/digest.txt
 
       - name: Read digests from artifacts
         id: digests
